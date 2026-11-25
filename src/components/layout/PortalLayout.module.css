@@ -1,0 +1,57 @@
+/* Content Area — NavigationLayout handles scroll and positioning */
+.content {
+  padding: 0;
+  background: var(--sapBackgroundColor, #F5F6F7);
+  min-height: 100%;
+}
+
+/* A page the user's roles don't give access to */
+.noAccess {
+  padding: 64px 16px;
+}
+
+/* "AJI Sales Portal" in the shell bar — Inter Bold. 13.5px here matches the letter height of the
+   14px "SAP Business One" title (SAP 72 font) */
+.portalTitle {
+  font-family: var(--font-inter), var(--app-font);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #1B2337;
+  white-space: nowrap;
+}
+
+/* Several companies: the company logged in to, after the portal's name */
+.companyName {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #D9D9D9;
+  font-weight: 500;
+  color: #556B82;
+}
+
+
+/* Notification Dropdown */
+.notifDropdown {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+  width: 360px;
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.notifHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Responsive — Tablet & Phone */
+@media (max-width: 768px) {
+  .notifDropdown {
+    width: min(360px, 90vw);
+  }
+}

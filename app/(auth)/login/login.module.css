@@ -1,0 +1,171 @@
+/* SAP B1 Web Client Login Screen */
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Left side - Background image area */
+.imageSection {
+  flex: 1;
+  position: relative;
+  background: url('/login-bg.jpg') center center / cover no-repeat;
+  background-color: #1a2a3a;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 24px 32px;
+  min-width: 0;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.logoSap {
+  background: #0854A0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+.logoBusiness {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+.portalBadge {
+  position: relative;
+  z-index: 2;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Fast Track logo - top right of image section */
+.fastTrackLogo {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  height: 36px;
+  width: auto;
+  z-index: 2;
+}
+
+/* Tagline - centered in image section */
+.tagline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.taglineText {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 300;
+  margin: 0 0 14px 0;
+  letter-spacing: 0.5px;
+}
+
+.taglineSub {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Right side - Login form */
+.formSection {
+  width: 420px;
+  min-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 48px;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 320px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 400;
+  color: #32363A;
+  margin-bottom: 32px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.input {
+  height: 44px;
+  border-radius: 4px !important;
+  font-size: 14px;
+}
+
+.loginButton {
+  height: 44px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+  margin-top: 8px;
+  background: var(--app-accent) !important;
+  border-color: var(--app-accent) !important;
+  color: var(--app-accent-text) !important;
+}
+
+.loginButton:hover {
+  background: var(--app-accent-hover) !important;
+  border-color: var(--app-accent-hover) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .imageSection {
+    height: 200px;
+    flex: none;
+  }
+
+  .formSection {
+    width: 100%;
+    min-width: unset;
+    flex: 1;
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formSection {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}

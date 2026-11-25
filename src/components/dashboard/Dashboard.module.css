@@ -1,0 +1,349 @@
+/* Dashboard - toolbar, title, My Work tiles, then the widgets (4-column grid; a widget spans 1, 2 or 4 columns) */
+
+.root {
+  padding: 20px 24px 24px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+}
+
+.welcome {
+  margin: 2px 0 18px;
+  color: var(--sap-text-secondary);
+}
+
+.sectionTitle {
+  margin: 18px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+}
+
+/* ---- My Work tiles ---- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1300px) {
+  .tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Each tile in its own colour (--tile-color): tinted card, coloured left edge, icon in a coloured circle */
+.tile {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tile-color) 14%, #ffffff), #ffffff 70%);
+  border: 1px solid color-mix(in srgb, var(--tile-color) 25%, #ffffff);
+  border-left: 5px solid var(--tile-color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.tile:hover {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--tile-color) 30%, transparent);
+  transform: translateY(-2px);
+}
+
+/* Nothing waiting: the same colours, a little quieter */
+.tileIdle {
+  opacity: 0.72;
+}
+
+.tileIcon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #ffffff;
+  background: var(--tile-color);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--tile-color) 40%, transparent);
+}
+
+.tileCount {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--tile-color);
+}
+
+.tileTitle {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--sap-text-primary);
+}
+
+/* ---- Widgets ---- */
+
+.widgets {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.span1 {
+  grid-column: span 1;
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+.span4 {
+  grid-column: span 4;
+}
+
+@media (max-width: 1100px) {
+  .widgets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .span4 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .widgets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .span1,
+  .span2,
+  .span4 {
+    grid-column: span 1;
+  }
+}
+
+/* Every widget has its accent colours (--accent-from light, --accent-to dark): a coloured top bar on chart / table
+   cards; a gradient card for a KPI */
+.widget {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--sap-bg-card);
+  border: 1px solid var(--sap-border);
+  border-top: 4px solid var(--accent-to, var(--sap-brand));
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.widgetChart .widgetTitle,
+.widgetTable .widgetTitle {
+  color: var(--accent-to, var(--sap-text-primary));
+}
+
+/* KPI: a gradient card with white text and a faint picture in the corner */
+.widgetKpi {
+  border: none;
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-to) 35%, transparent);
+  color: #ffffff;
+}
+
+.widgetKpi .widgetTitle,
+.widgetKpi .widgetInfo,
+.widgetKpi .widgetOpen,
+.widgetKpi .kpiValue,
+.widgetKpi .kpiCompare,
+.widgetKpi .empty,
+.widgetKpi .error {
+  color: #ffffff;
+}
+
+.widgetKpi .widgetInfo {
+  opacity: 0.8;
+}
+
+.kpiIcon {
+  position: absolute;
+  right: -6px;
+  bottom: -14px;
+  font-size: 84px;
+  color: #ffffff;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.widgetKpi .widgetBody {
+  min-height: 92px;
+}
+
+.widgetChart .widgetBody {
+  height: 280px;
+}
+
+.widgetTable .widgetBody {
+  max-height: 320px;
+  min-height: 92px;
+}
+
+.widgetHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.widgetTitle {
+  flex: 1;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.widgetInfo {
+  color: var(--sap-text-secondary);
+}
+
+.widgetOpen {
+  color: var(--sap-brand);
+  cursor: pointer;
+}
+
+.widgetBody {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.kpiValue {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--sap-brand);
+  line-height: 1.2;
+}
+
+.kpiCompare {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--sap-text-secondary);
+}
+
+/* The change against the compared figure: a small white chip, green up / red down */
+.up,
+.down {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  font-weight: 600;
+}
+
+.up {
+  color: #2e7d32;
+}
+
+.down {
+  color: #c62828;
+}
+
+.empty,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 80px;
+  color: var(--sap-text-secondary);
+  text-align: center;
+}
+
+.error {
+  color: var(--sap-error);
+  font-size: 12px;
+}
+
+.tableWrap {
+  overflow: auto;
+  max-height: 320px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--accent-from) 22%, #ffffff);
+  color: var(--accent-to);
+  text-align: left;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-bottom: 2px solid var(--accent-from);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
+}
+
+.table tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--accent-from) 6%, #ffffff);
+}
+
+.table tr:hover td {
+  background: var(--sap-row-hover);
+}
+
+.numberCell {
+  text-align: right;
+}
+
+.noWidgets {
+  padding: 16px;
+  background: var(--sap-bg-card);
+  border: 1px dashed var(--sap-border);
+  border-radius: 8px;
+  color: var(--sap-text-secondary);
+}

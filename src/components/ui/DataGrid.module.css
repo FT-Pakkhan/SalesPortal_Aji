@@ -1,0 +1,205 @@
+/* Data grid — optional toolbar strip, the grid, then the pager footer */
+
+.gridWrapper {
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gridWrapper :global(.ag-header) {
+  background: #F5F6F7;
+}
+
+.clickableRows :global(.ag-row) {
+  cursor: pointer;
+}
+
+.gridWrapper :global(.ag-row:hover) {
+  background: #F5FAFF !important;
+}
+
+/* Edit mode: cells that can be changed are rounded white fields, the others greyed (SAP B1) */
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-locked) {
+  background: #F2F2F2;
+  color: #6A6D70;
+}
+
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-editable) {
+  background: #fff;
+}
+
+/* The field: a pill drawn inside the cell (an outline only, so the value stays on top) */
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-editable)::before {
+  content: '';
+  position: absolute;
+  inset: 4px 5px;
+  border: 1px solid #A9BCD3;
+  border-radius: 999px;
+  pointer-events: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-editable:hover)::before {
+  border-color: var(--sap-brand);
+  box-shadow: 0 0 0 2px rgba(10, 110, 209, 0.12);
+}
+
+/* While typing in it: the grid's own editor takes the same pill shape */
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-editable.ag-cell-inline-editing)::before {
+  display: none;
+}
+
+.gridWrapper :global(.ag-row .ag-cell.dg-cell-editable.ag-cell-inline-editing) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding: 4px 5px;
+}
+
+.gridWrapper :global(.ag-cell.dg-cell-editable.ag-cell-inline-editing .ag-input-field-input),
+.gridWrapper :global(.ag-cell.dg-cell-editable.ag-cell-inline-editing .ag-picker-field-wrapper) {
+  border-radius: 999px;
+  border: 1px solid var(--sap-brand);
+  box-shadow: 0 0 0 2px rgba(10, 110, 209, 0.15);
+  padding-left: 12px;
+}
+
+/* Every cell's content sits in the middle, top-to-bottom, so text, checkboxes and buttons line up */
+.gridWrapper :global(.ag-cell) {
+  display: flex;
+  align-items: center;
+}
+
+.gridWrapper :global(.ag-cell) > * {
+  min-width: 0;
+}
+
+/* Long values wrap onto more lines (keeping their own line breaks) and the row grows */
+.gridWrapper :global(.ag-cell-wrap-text) {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.4;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* The full-screen loading overlay already says "Loading...", so hide the grid's own message */
+.gridWrapper :global(.ag-overlay-loading-center) {
+  display: none;
+}
+
+/* Footer row (right-click a column header > Footer): totals of the rows shown, under each column */
+.gridWrapper :global(.ag-floating-bottom) {
+  border-top: 1px solid #D9D9D9 !important;
+}
+
+.gridWrapper :global(.ag-floating-bottom .ag-row) {
+  background: #F5F6F7;
+  font-weight: 600;
+  cursor: context-menu;
+}
+
+/* Right-click menu of a grid (header: Column Chooser / Footer; footer: Sum, Min, ...) */
+.gridMenu {
+  position: fixed;
+  z-index: 1100;
+  min-width: 170px;
+  background: #fff;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  padding: 4px 0;
+}
+
+.gridMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.gridMenuItem:hover {
+  background: #F5FAFF;
+}
+
+.gridMenuIcon {
+  width: 18px;
+  text-align: center;
+  color: #6A6D70;
+  font-weight: 600;
+}
+
+.gridMenuLabel {
+  flex: 1;
+}
+
+.gridMenuCheck {
+  width: 14px;
+  color: var(--sap-brand);
+}
+
+/* Column Chooser: opened by right-clicking a column header, at the mouse position */
+.columnChooser {
+  position: fixed;
+  z-index: 1100;
+  min-width: 200px;
+  max-width: 280px;
+  background: #fff;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+}
+
+.columnChooserTitle {
+  padding: 2px 12px 6px;
+  font-weight: 600;
+  border-bottom: 1px solid #F0F0F0;
+  margin-bottom: 4px;
+}
+
+.columnChooserList {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.columnChooserItem {
+  padding: 2px 12px;
+}
+
+.columnChooserItem:hover {
+  background: #F5FAFF;
+}
+
+/* Toolbar strip inside the grid box (grids inside a detail view) */
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #F5F6F7;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+/* Pager footer: "Page 1 of 3 (48 items)" + page numbers on the left, page size on the right */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #F5F6F7;
+  border-top: 1px solid #E5E5E5;
+  font-size: 13px;
+  color: var(--sap-text-primary);
+}
+
+.pagerLeft,
+.pagerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

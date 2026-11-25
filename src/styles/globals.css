@@ -1,0 +1,226 @@
+/* SAP B1 Web Client Theme - Global Styles */
+
+:root {
+  /* SAP Fiori Color Palette */
+  --sap-brand: #0854A0;
+  --sap-brand-hover: #064280;
+  --sap-brand-active: #053568;
+  --sap-bg-page: #F5F6F7;
+  --sap-bg-card: #FFFFFF;
+  --sap-text-primary: #32363A;
+  --sap-text-secondary: #6A6D70;
+  --sap-text-placeholder: #A8A8A8;
+  --sap-border: #E5E5E5;
+  --sap-border-focus: #0854A0;
+  --sap-error: #BB0000;
+  --sap-success: #107E3E;
+  --sap-warning: #E9730C;
+  --sap-info: #0854A0;
+  --sap-shell-bg: #354A5F;
+  --sap-shell-text: #FFFFFF;
+  --sap-tab-active: #0854A0;
+  --sap-row-hover: #F5FAFF;
+  --sap-row-selected: #E5F0FB;
+
+  /* Portal font: SAP's "72" (loaded by UI5), the same font the shell bar and sidebar use.
+     Also set for Ant Design in app/layout.tsx and for the grids in src/components/ui/DataGrid.tsx */
+  --app-font: '72', '72full', Arial, Helvetica, sans-serif;
+
+  /* Accent yellow — loading screen, sidebar hover, coloured buttons */
+  --app-accent: #FFC21A;
+  --app-accent-hover: #F0AE00;
+  --app-accent-text: #1F1F1F;
+}
+
+/* Number fields have no up / down arrow buttons — numbers are typed. Covers Ant Design number boxes
+   (-actions in antd 6, -handler-wrap in older versions) and the browser's own arrows in grid cell editors. */
+.ant-input-number-actions,
+.ant-input-number-handler-wrap {
+  display: none !important;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Hide the divider UI5 draws between the shell bar title and its content slot ("Sales Portal") */
+ui5-shellbar {
+  --_ui5-shellbar_separator-color: transparent;
+}
+
+/* Sidebar: group headings (System Initialization, ...) look like Dashboard — bold, same dark text colour;
+   the items under them are regular. */
+ui5-side-navigation-group {
+  --sapFontFamily: var(--sapFontSemiboldDuplexFamily);
+  color: var(--sapList_TextColor);
+}
+
+ui5-side-navigation-group ui5-side-navigation-item {
+  --sapFontFamily: var(--app-font);
+  --sapFontSemiboldDuplexFamily: var(--app-font);
+}
+
+/* Sidebar: hovered items turn the accent yellow instead of grey. The selected item keeps
+   its blue marker on the left. Set on every sidebar element, as each defines these itself. */
+ui5-side-navigation,
+ui5-side-navigation-group,
+ui5-side-navigation-item {
+  --sapList_Hover_Background: var(--app-accent);
+  --_ui5_side_navigation_collapsed_selected_item_background_hover:
+    0 100% / .188rem 100% no-repeat linear-gradient(0deg, var(--sapHighlightColor), var(--sapHighlightColor)),
+    var(--app-accent);
+}
+
+/* Keep the menu button and the avatar off the window edges */
+ui5-shellbar::part(root) {
+  padding-left: 12px;
+  padding-right: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--app-font);
+  font-size: 14px;
+  color: var(--sap-text-primary);
+  background: var(--sap-bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Coloured (primary) buttons — New, Edit, Save, OK, Log In ... — use the accent yellow with dark text.
+   Not the red "danger" ones: the confirm button of Delete / Close / Cancel stays red as a warning. */
+.ant-btn-primary:not(:disabled):not(.ant-btn-dangerous) {
+  background: var(--app-accent) !important;
+  border-color: var(--app-accent) !important;
+  color: var(--app-accent-text) !important;
+}
+
+.ant-btn-primary:not(:disabled):not(.ant-btn-dangerous):hover {
+  background: var(--app-accent-hover) !important;
+  border-color: var(--app-accent-hover) !important;
+}
+
+.ant-input,
+.ant-select-selector,
+.ant-picker {
+  border-radius: 4px !important;
+  border-color: var(--sap-border) !important;
+}
+
+.ant-input:focus,
+.ant-input-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--sap-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--sap-border-focus) !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--sap-tab-active) !important;
+}
+
+.ant-tabs-ink-bar {
+  background: var(--sap-tab-active) !important;
+}
+
+/* SAP-style form labels */
+.sap-form-label {
+  color: var(--sap-text-secondary);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.sap-form-label.required::after {
+  content: '*';
+  color: var(--sap-error);
+  margin-left: 3px;
+}
+
+/* SAP-style section headers */
+.sap-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+  margin-bottom: 16px;
+}
+
+/* SAP-style card */
+.sap-card {
+  background: var(--sap-bg-card);
+  border: 1px solid var(--sap-border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Bottom action bar */
+.sap-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: var(--sap-bg-card);
+  border-top: 1px solid var(--sap-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  gap: 8px;
+  z-index: 100;
+}
+
+/* Mobile Responsive Utilities */
+.mobile-hide {
+  display: initial;
+}
+
+@media (max-width: 768px) {
+  .sap-action-bar {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .sap-action-bar {
+    padding: 0 8px;
+  }
+
+  /* Prevent iOS zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

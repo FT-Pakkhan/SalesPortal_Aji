@@ -1,0 +1,244 @@
+/* Detail view — toolbar on top, then title, then one section of label / value rows */
+
+.root {
+  padding: 20px 24px 24px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+}
+
+.fields {
+  max-width: 480px;
+}
+
+/* Two columns of rows side by side, close together and equally wide (e.g. inside a tab): both columns' colons and
+   boxes line up; stacked on narrow screens */
+.pairColumns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.pairColumns > .fields {
+  flex: 0 1 520px;
+  max-width: 520px;
+}
+
+/* A tab box holding two such columns: only as wide as they are (2 x 520 + gap + padding), not the whole screen */
+.pairPanel {
+  max-width: 1114px;
+}
+
+/* Rows on the left, a second column (e.g. checkboxes) at the right edge, as in SAP B1; stacked on narrow screens */
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 48px;
+  row-gap: 4px;
+}
+
+.columns > .fields:first-child {
+  flex: 0 1 480px;
+}
+
+/* Sized for label / value rows; a column of checkboxes simply leaves the rest empty */
+.side {
+  flex: 0 1 400px;
+}
+
+/* A tab that holds rows instead of a grid (e.g. Posting): boxed like the grids, so it ends clearly above the footer */
+.tabPanel {
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-height: 120px;
+}
+
+/* Rows under a lines grid, e.g. Sales Employee and Remarks (like SAP's document footer) */
+.footer {
+  margin-top: 12px;
+}
+
+/* Document totals: a wider label column ("Total Before Discount") and amounts lined up on the right, as in SAP B1 */
+.amounts :global(.ant-form-item-label) {
+  flex: 0 0 170px !important;
+}
+
+.amounts :global(.ant-input),
+.amounts :global(.ant-input-number-input) {
+  text-align: right !important;
+}
+
+.amounts .readOnlyText {
+  display: block;
+  text-align: right;
+  padding-right: 8px;
+}
+
+/* Discount row: [ % ] %  [ amount ] */
+.discount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.discount > :first-child {
+  flex: 0 0 90px;
+}
+
+.discount > :last-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Two controls side by side in one value cell, e.g. Series drop-down + No.:
+   the first is short (about 5 characters, e.g. a series code), the second takes the rest of the row */
+.pair {
+  display: flex;
+  gap: 4px;
+}
+
+.pair > * {
+  min-width: 0;
+}
+
+.pair > :first-child {
+  flex: 0 0 90px;
+}
+
+.pair > :last-child {
+  flex: 1 1 0;
+}
+
+/* Rows whose value needs room, e.g. a query */
+.wide {
+  max-width: 1000px;
+}
+
+.below {
+  margin-top: 12px;
+}
+
+/* Section heading inside the rows (DetailSection): bold, with a line under it */
+.sectionTitle {
+  margin: 16px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #D9D9D9;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+}
+
+.sectionTitle:first-child {
+  margin-top: 0;
+}
+
+/* A heading with something beside its title (e.g. "Same as Business Address"), kept on the heading's line height */
+.sectionTitleExtra {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  line-height: 22px;
+}
+
+.sectionTitleExtra :global(.ant-checkbox-wrapper) {
+  font-weight: normal;
+}
+
+/* Compact rows */
+.fields :global(.ant-form-item) {
+  margin-bottom: 4px;
+}
+
+/* Label fills its column so the ":" can sit at the right edge, lined up beside the textboxes */
+.fields :global(.ant-form-item-label > label) {
+  width: 100%;
+}
+
+.colon {
+  margin-left: auto;
+  padding-right: 4px;
+}
+
+/* Red * after the label of a mandatory field (edit mode) */
+.requiredMark {
+  color: var(--sap-error);
+}
+
+/* Edit mode: text and drop-down fields are clearly boxed textboxes */
+.fields :global(.ant-input),
+.fields :global(.ant-input-affix-wrapper),
+.fields :global(.ant-input-number),
+.fields :global(.ant-picker-outlined),
+.fields :global(.ant-select-outlined) {
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 2px !important;
+  background: #FFFFFF;
+}
+
+/* Number and date fields fill the value column like the textboxes */
+.fields :global(.ant-input-number),
+.fields :global(.ant-picker) {
+  width: 100%;
+}
+
+/* Inputs with an icon (e.g. password) — the wrapper carries the border, not the inner input */
+.fields :global(.ant-input-affix-wrapper .ant-input) {
+  border: none !important;
+}
+
+/* Failed validation */
+.fields :global(.ant-input-status-error),
+.fields :global(.ant-input-affix-wrapper-status-error),
+.fields :global(.ant-input-number-status-error),
+.fields :global(.ant-picker-status-error),
+.fields :global(.ant-select-status-error) {
+  border-color: var(--sap-error) !important;
+}
+
+/* Fields that cannot be edited are greyed out */
+.fields :global(.ant-input-disabled),
+.fields :global(.ant-input[disabled]),
+.fields :global(.ant-input-affix-wrapper-disabled),
+.fields :global(.ant-select-disabled) {
+  background: #E6E6E6 !important;
+  border-color: #BFC5CC !important;
+  color: #6A6D70 !important;
+}
+
+/* Checkboxes line up with the text inside the textboxes */
+.fields :global(.ant-checkbox-wrapper) {
+  margin-left: 8px;
+}
+
+.readOnlyText {
+  display: inline-block;
+  /* Same left inset as a textbox (7px padding + 1px border), so text doesn't shift between view and edit mode */
+  padding-left: 8px;
+  min-height: 22px;
+  line-height: 22px;
+  /* Not on the text baseline: an empty value would otherwise make its row taller than one with text */
+  vertical-align: top;
+  color: var(--sap-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.multiline {
+  white-space: pre-wrap;
+}
